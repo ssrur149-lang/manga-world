@@ -1,0 +1,215 @@
+/* MANGA WORLD — Nightfall Edition
+   Non-destructive visual overhaul for the existing index.html.
+   Place <link rel="stylesheet" href="manga-world-nightfall.css">
+   AFTER the existing </style> tag in <head>.
+   Keeps existing JS, menu, search, chapter reader, and progress tracking.
+*/
+:root {
+  --bg:#080710;
+  --surface:#151122;
+  --line:#383049;
+  --gold:#e3bb7a;
+  --gold2:#b990ff;
+  --text:#f7f3ff;
+  --muted:#aca6bf;
+}
+html {scroll-behavior:smooth}
+body {
+  background:
+    radial-gradient(ellipse 760px 540px at 88% 3%,rgba(123,59,180,.18),transparent 76%),
+    radial-gradient(ellipse 700px 600px at 3% 27%,rgba(40,66,125,.16),transparent 72%),
+    linear-gradient(165deg,#080710,#0e0a19 56%,#070712);
+  color:var(--text);
+}
+::selection {background:#c89aff;color:#140b22}
+header {
+  background:rgba(11,8,20,.86);
+  border-bottom:1px solid rgba(213,176,255,.18);
+  box-shadow:0 10px 46px rgba(0,0,0,.45);
+  -webkit-backdrop-filter:blur(20px);
+  backdrop-filter:blur(20px);
+}
+header .inner{max-width:1240px; min-height:75px}
+.logo{
+  color:#fff3df;
+  font-family:Georgia,'Noto Serif Thai',serif;
+  font-size:clamp(19px,3vw,28px);
+  letter-spacing:2px;
+  text-shadow:0 2px 22px rgba(209,145,255,.27);
+}
+.logo:before{content:'✦';color:#e6ba76;margin-right:10px}
+.primary-nav button {
+  background:transparent;
+  color:#c1b9d6;
+  border:1px solid transparent;
+  border-radius:12px;
+  font-weight:650;
+}
+.primary-nav button:hover{color:#fff; background:rgba(202,154,255,.09)}
+.primary-nav button[aria-current="page"]{
+  background:rgba(190,134,255,.14);
+  border-color:rgba(209,163,255,.38);
+  color:#fff3df;
+}
+main{max-width:1190px;padding-top:32px}
+button,.btn{
+  border-radius:12px;
+  background:linear-gradient(112deg,#f1d2a1,#b98af0);
+  color:#21132c;
+  box-shadow:0 5px 18px rgba(113,62,155,.13);
+}
+button:hover:not(:disabled){box-shadow:0 11px 28px rgba(120,73,169,.28)}
+.secondary{background:#241c36;color:#f3eaff;border:1px solid #62517e}
+.ghost{background:transparent;color:#ead4ff;border:1px solid #7b629c}
+.hero.ice-hero{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  grid-template-columns:none;
+  gap:0;
+  min-height:410px;
+  padding:clamp(35px,6.2vw,76px);
+  border-radius:27px;
+  border:1px solid rgba(209,168,247,.31);
+  background:
+    radial-gradient(circle at 88% 32%,rgba(185,126,247,.24),transparent 33%),
+    radial-gradient(circle at 60% 112%,rgba(151,97,200,.17),transparent 45%),
+    linear-gradient(110deg,#151024 4%,#1d1430 54%,#0e0b1c 100%);
+  box-shadow:0 27px 80px rgba(0,0,0,.42),inset 0 0 70px rgba(190,133,252,.035);
+  overflow:hidden;
+}
+.hero.ice-hero:before{
+  content:"MANGA WORLD  /  ORIGINAL STORIES";
+  display:block;
+  margin:0 0 24px;
+  color:#e6ba76;
+  font:750 11px/1.5 system-ui,sans-serif;
+  letter-spacing:3px;
+}
+.hero.ice-hero:after{
+  content:"✦";
+  display:block;
+  position:absolute;
+  top:5%;right:4%;
+  color:rgba(214,177,255,.15);
+  font:300 clamp(210px,30vw,360px)/1 Georgia,serif;
+  pointer-events:none;
+  z-index:-1;
+  transform:rotate(-16deg);
+}
+.hero-art{display:none!important} /* Removes winged heroine artwork from hero */
+.hero-copy{position:relative;z-index:1;max-width:790px;min-width:0}
+.hero-kicker{display:none}
+.ice-hero h1,.hero h1{
+  font-family:Georgia,'Noto Serif Thai',serif;
+  font-size:clamp(36px,5.3vw,62px);
+  line-height:1.22;
+  color:#fff8f0;
+  text-shadow:0 10px 40px rgba(0,0,0,.55);
+  margin:0 0 19px;
+}
+.ice-hero p,.hero p{
+  color:#ccc2db;
+  font-size:clamp(14px,1.6vw,17px);
+  line-height:1.9;
+  max-width:630px;
+  margin-bottom:29px;
+}
+.hero button{padding:15px 32px;font-size:15px;font-weight:800}
+.hero button:hover{transform:translateY(-3px)}
+h2,.section-heading{color:#fff2e5}
+.section-heading:before{content:'✦';color:#e3bb7a}
+.library-heading{padding:10px 0 9px}
+.library-heading small,#resultCount{
+  background:rgba(194,160,245,.08);
+  border:1px solid #47375f;
+  border-radius:999px;
+  padding:7px 13px;
+}
+.browse-tools{margin-bottom:25px}
+.search,.genre-select{
+  background:#161224;
+  border:1px solid #483958;
+  color:#f5ecff;
+  border-radius:13px;
+  box-shadow:none;
+}
+.search::placeholder{color:#898099}
+.search:focus,.genre-select:focus{
+  border-color:#bf92f3;
+  outline:2px solid rgba(188,143,246,.2);
+  outline-offset:0;
+}
+.grid{gap:22px}
+.card{
+  border-radius:18px;
+  background:linear-gradient(175deg,#1c1729,#100d1a);
+  border:1px solid rgba(184,142,219,.25);
+  box-shadow:0 14px 38px rgba(0,0,0,.32);
+}
+.card:hover{
+  transform:translateY(-7px)!important;
+  border-color:rgba(230,188,119,.8);
+  box-shadow:0 24px 42px rgba(0,0,0,.58),0 0 0 1px rgba(230,188,119,.09);
+}
+.cover{
+  background:
+    radial-gradient(ellipse at 70% 12%,rgba(176,91,216,.36),transparent 55%),
+    radial-gradient(ellipse at 10% 95%,rgba(205,140,83,.16),transparent 46%),
+    linear-gradient(150deg,#3a2857,#100e20 60%,#080814);
+}
+.cover.alt{
+  background:
+    radial-gradient(circle at 78% 15%,rgba(91,107,198,.35),transparent 47%),
+    linear-gradient(145deg,#25324f,#1a112b 65%,#0b0a18);
+}
+.cover:after{
+  inset:10px;
+  border:1px solid rgba(236,193,130,.28);
+  border-radius:2px;
+}
+.cover span{
+  background:rgba(13,9,23,.88);
+  color:#f0dbbe;
+  border:1px solid rgba(232,193,139,.25);
+  border-radius:7px;
+}
+.card-info{padding:17px}
+.card-info b{color:#faf3ff;font-size:16px}
+.card-info small{color:#a69bb7}
+.detail h1{color:#f4debe}
+.chapter,.episode-row,.reading-card{
+  border-color:#463554;
+  background:#1a1429;
+  color:#f4ecff;
+}
+.chapter:hover,.episode-row:hover{border-color:#c6a1e9;background:#251c36}
+.page-intro h1{color:#fff2e5}
+.eyebrow{color:#e7ba76}
+.notice{background:#20172f;border-left-color:#e7ba76}
+.ad{background:#120e1d;border-color:#514060}
+.reader-controls button.active{background:linear-gradient(110deg,#efd1a3,#bb96ed);color:#1b1426}
+.reader-controls button:not(.active){background:#291d3b;color:#e9daff}
+.empty-state{background:#151120;border-color:#59466e}
+.footer-brand{color:#e8c18b}
+footer{background:#080611;border-color:#2d233a;color:#a69cb8;padding-top:36px}
+.footer-links button{color:#bfb2ce}
+.footer-links button:hover{color:#f0ce9d}
+@media(max-width:700px){
+  header .inner{min-height:60px}
+  .hero.ice-hero{min-height:350px;padding:33px 25px;gap:0}
+  .hero.ice-hero:before{letter-spacing:1.9px;font-size:10px;margin-bottom:18px}
+  .hero.ice-hero:after{right:-9%;top:16%;font-size:210px}
+  .ice-hero h1,.hero h1{font-size:clamp(33px,8.5vw,45px)}
+  .hero p,.ice-hero p{font-size:14px}
+  .hero button{width:100%;padding:14px}
+  .card-info{padding:13px}
+  .grid{gap:12px}
+  .primary-nav.is-open{background:rgba(12,9,23,.96);border-top-color:#3c2b4a}
+  .primary-nav button{background:#1a1329;border:1px solid #3f2c50}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
