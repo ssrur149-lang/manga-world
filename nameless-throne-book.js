@@ -23,5 +23,14 @@ const namelessThrone = {
       { src: 'ep02-page004.png', width: 864, height: 1536, alt: 'ตอนที่ 2 หน้า 4' },
       { src: 'ep02-page005.png', width: 864, height: 1536, alt: 'ตอนที่ 2 หน้า 5' }
     ]
+  }, {
+    name: 'ตอนที่ 3',
+    pages: [
+      { src: 'episodes/ep03/ep02-page001.png', width: 1024, height: 1536, alt: 'ตอนที่ 3 หน้า 1' },
+      { src: 'episodes/ep03/ep02-page002.png', width: 1024, height: 1536, alt: 'ตอนที่ 3 หน้า 2' },
+      { src: 'episodes/ep03/ep02-page003.png', width: 1024, height: 1536, alt: 'ตอนที่ 3 หน้า 3' },
+      { src: 'episodes/ep03/ep02-page004.png', width: 864, height: 1536, alt: 'ตอนที่ 3 หน้า 4' },
+      { src: 'episodes/ep03/ep02-page005.png', width: 864, height: 1536, alt: 'ตอนที่ 3 หน้า 5' }
+    ]
   }]
 };
