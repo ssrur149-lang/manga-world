@@ -14,5 +14,14 @@ const namelessThrone = {
       { src: 'page-004.jpg', width: 864, height: 1536, alt: 'กษัตริย์เอ่ยคำตัดสินต่อหน้าอากิระ' },
       { src: 'page-005.jpg', width: 1024, height: 1536, alt: 'ทหารนำทางอากิระออกจากท้องพระโรง' }
     ]
+  }, {
+    name: 'ตอนที่ 2',
+    pages: [
+      { src: 'ep02-page001.png', width: 1024, height: 1536, alt: 'ตอนที่ 2 หน้า 1' },
+      { src: 'ep02-page002.png', width: 1024, height: 1536, alt: 'ตอนที่ 2 หน้า 2' },
+      { src: 'ep02-page003.png', width: 1024, height: 1536, alt: 'ตอนที่ 2 หน้า 3' },
+      { src: 'ep02-page004.png', width: 864, height: 1536, alt: 'ตอนที่ 2 หน้า 4' },
+      { src: 'ep02-page005.png', width: 864, height: 1536, alt: 'ตอนที่ 2 หน้า 5' }
+    ]
   }]
 };
