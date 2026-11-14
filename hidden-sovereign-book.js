@@ -138,6 +138,71 @@ const hiddenSovereign = {
           "alt": "THE HIDDEN SOVEREIGN ตอนที่ 2 หน้า 10"
         }
       ]
+    },
+    {
+      "name": "ตอนที่ 3",
+      "pages": [
+        {
+          "src": "manga/the-hidden-sovereign/ep03-page001.png",
+          "width": 1024,
+          "height": 1536,
+          "alt": "THE HIDDEN SOVEREIGN ตอนที่ 3 หน้า 1"
+        },
+        {
+          "src": "manga/the-hidden-sovereign/ep03-page002.png",
+          "width": 1024,
+          "height": 1536,
+          "alt": "THE HIDDEN SOVEREIGN ตอนที่ 3 หน้า 2"
+        },
+        {
+          "src": "manga/the-hidden-sovereign/ep03-page003.png",
+          "width": 1024,
+          "height": 1536,
+          "alt": "THE HIDDEN SOVEREIGN ตอนที่ 3 หน้า 3"
+        },
+        {
+          "src": "manga/the-hidden-sovereign/ep03-page004.png",
+          "width": 1024,
+          "height": 1536,
+          "alt": "THE HIDDEN SOVEREIGN ตอนที่ 3 หน้า 4"
+        },
+        {
+          "src": "manga/the-hidden-sovereign/ep03-page005.png",
+          "width": 1024,
+          "height": 1536,
+          "alt": "THE HIDDEN SOVEREIGN ตอนที่ 3 หน้า 5"
+        },
+        {
+          "src": "manga/the-hidden-sovereign/ep03-page006.png",
+          "width": 1024,
+          "height": 1536,
+          "alt": "THE HIDDEN SOVEREIGN ตอนที่ 3 หน้า 6"
+        },
+        {
+          "src": "manga/the-hidden-sovereign/ep03-page007.png",
+          "width": 1024,
+          "height": 1536,
+          "alt": "THE HIDDEN SOVEREIGN ตอนที่ 3 หน้า 7"
+        },
+        {
+          "src": "manga/the-hidden-sovereign/ep03-page008.png",
+          "width": 1024,
+          "height": 1536,
+          "alt": "THE HIDDEN SOVEREIGN ตอนที่ 3 หน้า 8"
+        },
+        {
+          "src": "manga/the-hidden-sovereign/ep03-page009.png",
+          "width": 1024,
+          "height": 1536,
+          "alt": "THE HIDDEN SOVEREIGN ตอนที่ 3 หน้า 9"
+        },
+        {
+          "src": "manga/the-hidden-sovereign/ep03-page010.png",
+          "width": 1024,
+          "height": 1536,
+          "alt": "THE HIDDEN SOVEREIGN ตอนที่ 3 หน้า 10"
+        }
+      ]
     }
   ]
 };
