@@ -21,10 +21,11 @@ a{color:inherit}a:focus-visible,select:focus-visible{outline:2px solid var(--gol
 <link rel="stylesheet" href="manga-world-nightfall.css">
 </head><body><header><div class="inner"><a class="logo" href="#home" onclick="event.preventDefault();goHome()" aria-label="MANGA WORLD หน้าแรก">MANGA WORLD</a><button class="secondary menu-toggle" id="menuToggle" aria-controls="primaryNav" aria-expanded="false" onclick="toggleMenu()">☰ เมนู</button><nav class="primary-nav" id="primaryNav" aria-label="เมนูหลัก"><button data-view="home" onclick="goHome()">หน้าแรก</button><button data-view="library" onclick="goHome(true)">มังงะทั้งหมด</button><button data-view="chapters" onclick="showSection('chapters')">รายการตอน</button><button data-view="continue" onclick="showSection('continue')">อ่านต่อ</button></nav></div></header><main id="app"></main><footer><div class="footer-brand">MANGA WORLD</div><div class="footer-links"><button onclick="goHome()">หน้าแรก</button><button onclick="goHome(true)">มังงะทั้งหมด</button><button onclick="showSection('chapters')">รายการตอน</button><button onclick="showSection('continue')">อ่านต่อ</button></div><div class="footer-note">© 2026 MANGA WORLD · มังงะต้นฉบับ</div></footer>
 <script src="nameless-throne-book.js"></script>
+<script src="hidden-sovereign-book.js"></script>
 <script>
 
 'use strict';
-const books=[namelessThrone,{id:'new',title:'มังงะเรื่องใหม่',genre:'แอ็กชัน · ผจญภัย',icon:'⚔️',desc:'พื้นที่สำหรับมังงะต้นฉบับเรื่องต่อไป',chapters:[]}];
+const books=[hiddenSovereign,namelessThrone,{id:'new',title:'มังงะเรื่องใหม่',genre:'แอ็กชัน · ผจญภัย',icon:'⚔️',desc:'พื้นที่สำหรับมังงะต้นฉบับเรื่องต่อไป',chapters:[]}];
 // ใส่พาธภาพแบนเนอร์ที่อัปโหลดไว้ใน repository เพื่อเปลี่ยนธีมให้ทุกคนเห็น
 const SITE_THEME={heroImage:''};
 function readSaved(key,fallback=null){try{const value=localStorage.getItem(key);return value?JSON.parse(value):fallback}catch(e){return fallback}}
@@ -34,7 +35,7 @@ const app=document.getElementById('app');
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function cover(b){
   if(b.cover){
-    return `<div class="cover book-cover"><img src="${esc(b.cover)}" alt="ปกเล่ม 1 ของ ${esc(b.title)}" width="1152" height="1536" decoding="async"></div>`;
+    return `<div class="cover book-cover"><img src="${esc(b.cover)}" alt="ปกเล่ม 1 ของ ${esc(b.title)}" width="${b.coverWidth||1152}" height="${b.coverHeight||1536}" decoding="async"></div>`;
   }
   return `<div class="cover alt">${b.icon}<span>เร็ว ๆ นี้</span></div>`;
 }
@@ -42,7 +43,7 @@ function toggleMenu(){const open=document.getElementById('primaryNav').classList
 function syncNav(){document.getElementById('primaryNav').classList.remove('is-open');document.getElementById('menuToggle').setAttribute('aria-expanded','false');document.querySelectorAll('[data-view]').forEach(el=>{const active=el.dataset.view===current.view;if(active)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')})}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('primaryNav').classList.remove('is-open');document.getElementById('menuToggle').setAttribute('aria-expanded','false')}});
 function goHome(library=false){showSection(library?'library':'home')}
-function showSection(view){current.view=view;render();window.scrollTo(0,0)}
+function showSection(view){current.view=view;const route=view==='detail'?'#book/'+current.book.id:view==='reader'?'#read/'+current.book.id+'/'+(current.chapter+1):'#'+view;if(location.hash!==route)history.pushState(null,'',route);render();window.scrollTo(0,0)}
 function openBook(id){const book=books.find(b=>b.id===id);if(!book)return;current.book=book;showSection('detail')}
 function openChapter(i){if(!current.book?.chapters[i])return;current.chapter=i;current.page=0;const saved=readSaved('mw_progress_'+current.book.id+'_'+i);if(saved&&Number.isInteger(saved.page))current.page=Math.max(0,Math.min(saved.page,current.book.chapters[i].pages.length-1));saveProgress();showSection('reader')}
 function setMode(mode){current.mode=mode;try{localStorage.setItem('mw_mode',mode)}catch(e){}render()}
@@ -62,6 +63,16 @@ if(current.view==='continue'){let history=readSaved('mw_history',[]);if(!Array.i
 let b=current.book;if(current.view==='detail'){app.innerHTML=`<button class="ghost back" onclick="goHome()">← กลับหน้าแรก</button><section class="detail">${cover(b)}<div><h1>${esc(b.title)}</h1>${b.thaiTitle?`<p class="detail-subtitle">${esc(b.thaiTitle)}</p>`: ''}<p class="muted">${esc(b.genre)}</p><p>${esc(b.desc)}</p><p>${b.chapters.length} ตอน</p>${b.chapters.length?'<button onclick="openChapter(0)">เริ่มอ่านตอนที่ 1</button>':''}</div></section><section class="chapters"><h2 class="section-heading">รายชื่อตอน</h2>${b.chapters.length?b.chapters.map((c,i)=>`<button class="chapter" onclick="openChapter(${i})"><span>${esc(c.name)}</span><span>อ่าน ›</span></button>`).join(''):'<p class="notice">เรื่องนี้ยังไม่มีตอนให้อ่าน</p>'}</section>`;return}let c=b.chapters[current.chapter],n=c.pages.length;app.innerHTML=`<button class="ghost back" onclick="openBook('${b.id}')">← กลับรายชื่อตอน</button><div class="reader-head"><h1>${esc(b.title)} · ${esc(c.name)}</h1><span class="muted">${n} หน้า</span></div><div class="reader-controls"><button class="${current.mode==='scroll'?'active':''}" onclick="setMode('scroll')">↕ เลื่อนอ่าน</button><button class="${current.mode==='page'?'active':''}" onclick="setMode('page')">อ่านทีละหน้า</button></div><div id="art">${current.mode==='scroll'?c.pages.map((p,i)=>pageMarkup(p,i,n)).join(''):pageMarkup(c.pages[current.page],current.page,n)}</div>${current.mode==='page'?`<div class="page-nav"><button class="secondary" onclick="movePage(-1)" ${current.page===0?'disabled':''}>หน้าก่อนหน้า →</button><button onclick="movePage(1)" ${current.page===n-1?'disabled':''}>← หน้าถัดไป</button></div><p class="muted" style="text-align:center">หน้า ${current.page+1} จาก ${n} · จำหน้าที่อ่านค้างไว้ในเครื่องนี้</p>`:''}<div class="page-nav"><button class="secondary" onclick="openBook('${b.id}')">รายชื่อตอน</button><button onclick="nextChapter()" ${current.chapter+1>=b.chapters.length?'disabled':''}>ตอนถัดไป →</button></div>`}
 function filterBooks(){const q=document.getElementById('search').value.trim().toLowerCase(),genre=document.getElementById('genre').value;let count=0;document.querySelectorAll('.card').forEach(el=>{const ok=el.dataset.search.includes(q)&&el.dataset.genre.includes(genre);el.classList.toggle('hide',!ok);if(ok)count++});document.getElementById('noBooks').classList.toggle('hide',count!==0);document.getElementById('resultCount').textContent=count+' เรื่อง'}
 function nextChapter(){if(current.chapter+1<current.book.chapters.length)openChapter(current.chapter+1)}
-render();
+function restoreRoute(){
+const parts=location.hash.slice(1).split('/');
+if(parts[0]==='book'||parts[0]==='read'){
+ const book=books.find(b=>b.id===parts[1]);
+ if(book){current.book=book;if(parts[0]==='read'&&/^\d+$/.test(parts[2]||'')&&book.chapters[Number(parts[2])-1]){openChapter(Number(parts[2])-1);return}showSection('detail');return}
+}
+showSection(['home','library','chapters','continue'].includes(parts[0])?parts[0]:'home');
+}
+window.addEventListener('popstate',restoreRoute);
+window.addEventListener('hashchange',restoreRoute);
+restoreRoute();
 </script></body></html>
 
