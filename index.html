@@ -35,7 +35,7 @@ const app=document.getElementById('app');
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function cover(b){
   if(b.cover){
-    return `<div class="cover book-cover"><img src="${esc(b.cover)}" alt="ปกเล่ม 1 ของ ${esc(b.title)}" width="${b.coverWidth||1152}" height="${b.coverHeight||1536}" decoding="async"></div>`;
+    return `<div class="cover book-cover" style="aspect-ratio:${b.coverWidth||1152}/${b.coverHeight||1536}"><img src="${esc(b.cover)}" alt="ปกเล่ม 1 ของ ${esc(b.title)}" width="${b.coverWidth||1152}" height="${b.coverHeight||1536}" decoding="async"></div>`;
   }
   return `<div class="cover alt">${b.icon}<span>เร็ว ๆ นี้</span></div>`;
 }
